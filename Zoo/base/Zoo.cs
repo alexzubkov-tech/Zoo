@@ -10,18 +10,17 @@ namespace Zoo
     {
         public string Name { get; set; }
         public string Location { get; set; }
-        public List<IAnimal> animals { get; set; }
+        public List<IAnimal> animals { get; set; } = new List<IAnimal>();
 
-        public Zoo(string name, string location, List<IAnimal> animals)
+        public Zoo(string name, string location)
         {
             Name = name;
             Location = location;
-            this.animals = animals;
         }
 
-        public void AddAnimal(Zoo zoo, IAnimal animal)
+        public void AddAnimal(IAnimal animal)
         {
-            zoo.animals.Add(animal);
+            animals.Add(animal);
         }
 
         public void FeedAnimal(Zoo zoo, IAnimal animal)
@@ -39,6 +38,11 @@ namespace Zoo
             {
                 Console.WriteLine($"{i + 1} - {zoo.animals[i].Name} -> {zoo.animals[i].Energy} % энергии");
             }
+        }
+
+        public List<IAnimal> CanEatAnimals()
+        {
+            return animals.Where(a => a.CanEat).ToList();
         }
     }
 }
